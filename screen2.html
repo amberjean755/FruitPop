@@ -23,69 +23,69 @@
       radial-gradient(circle at 50% 50%, rgba(103,232,249,0.07) 0%, transparent 60%);
     pointer-events: none; z-index: 0;
   }
-  .wrapper { position: relative; z-index: 1; height: 100vh; display: flex; flex-direction: column; padding: 18px 24px 12px; }
-  .header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; flex-shrink: 0; }
-  .logo { font-family: 'Fredoka One', cursive; font-size: 56px; background: linear-gradient(135deg, var(--hot-pink), var(--bubblegum), var(--lemon)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: drop-shadow(0 0 12px rgba(255,45,123,0.4)); }
-  .screen-label { font-family: 'Fredoka One', cursive; font-size: 18px; color: rgba(255,255,255,0.2); letter-spacing: 3px; text-transform: uppercase; }
-  .divider { height: 2px; background: linear-gradient(90deg, transparent, var(--orange), var(--lemon), var(--mint), transparent); border-radius: 2px; margin-bottom: 10px; flex-shrink: 0; }
+  .wrapper { position: relative; z-index: 1; height: 100vh; display: flex; flex-direction: column; padding: 12px 20px 8px; }
+  .header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; flex-shrink: 0; }
+  .logo { font-family: 'Fredoka One', cursive; font-size: 48px; background: linear-gradient(135deg, var(--hot-pink), var(--bubblegum), var(--lemon)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: drop-shadow(0 0 12px rgba(255,45,123,0.4)); }
+  .screen-label { font-family: 'Fredoka One', cursive; font-size: 16px; color: rgba(255,255,255,0.2); letter-spacing: 3px; text-transform: uppercase; }
+  .divider { height: 2px; background: linear-gradient(90deg, transparent, var(--orange), var(--lemon), var(--mint), transparent); border-radius: 2px; margin-bottom: 8px; flex-shrink: 0; }
 
-  .seasonal-strip { background: linear-gradient(135deg, rgba(255,45,123,0.2), rgba(192,132,252,0.15)); border: 1.5px solid rgba(255,45,123,0.35); border-radius: 16px; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; flex-shrink: 0; }
-  .seasonal-left { display: flex; align-items: center; gap: 12px; }
-  .seasonal-icon { font-size: 28px; }
-  .seasonal-title { font-family: 'Fredoka One', cursive; font-size: 24px; color: var(--hot-pink); }
-  .seasonal-sub { font-size: 12px; color: rgba(255,255,255,0.45); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
-  .seasonal-prices { display: flex; gap: 10px; }
-  .s-pill { font-family: 'Fredoka One', cursive; font-size: 18px; padding: 5px 18px; border-radius: 20px; display: flex; align-items: center; gap: 5px; }
+  .seasonal-strip { background: linear-gradient(135deg, rgba(255,45,123,0.2), rgba(192,132,252,0.15)); border: 1.5px solid rgba(255,45,123,0.35); border-radius: 14px; padding: 9px 18px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; flex-shrink: 0; }
+  .seasonal-left { display: flex; align-items: center; gap: 10px; }
+  .seasonal-icon { font-size: 24px; }
+  .seasonal-title { font-family: 'Fredoka One', cursive; font-size: 22px; color: var(--hot-pink); }
+  .seasonal-sub { font-size: 11px; color: rgba(255,255,255,0.45); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+  .seasonal-prices { display: flex; gap: 8px; }
+  .s-pill { font-family: 'Fredoka One', cursive; font-size: 17px; padding: 4px 16px; border-radius: 18px; display: flex; align-items: center; gap: 4px; }
   .s-pill-pink { background: var(--hot-pink); color: white; }
   .s-pill-lav { background: var(--lavender); color: white; }
-  .s-size { font-size: 12px; font-weight: 800; opacity: 0.85; text-transform: uppercase; }
+  .s-size { font-size: 11px; font-weight: 800; opacity: 0.85; text-transform: uppercase; }
 
-  .top-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 12px; flex-shrink: 0; }
-  .bottom-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; flex: 1; min-height: 0; }
+  .top-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 10px; flex-shrink: 0; }
+  .bottom-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; flex: 1; min-height: 0; }
 
-  .card { border-radius: 22px; padding: 18px 20px; position: relative; overflow: hidden; border: 1.5px solid rgba(255,255,255,0.08); display: flex; flex-direction: column; }
+  .card { border-radius: 18px; padding: 14px 16px; position: relative; overflow: hidden; border: 1.5px solid rgba(255,255,255,0.08); display: flex; flex-direction: column; }
   .card::before { content: ''; position: absolute; inset: 0; background: rgba(255,255,255,0.025); pointer-events: none; }
   .card-sky { background: linear-gradient(135deg, rgba(103,232,249,0.17), rgba(103,232,249,0.05)); border-color: rgba(103,232,249,0.3); }
   .card-orange { background: linear-gradient(135deg, rgba(255,140,66,0.17), rgba(255,140,66,0.05)); border-color: rgba(255,140,66,0.3); }
   .card-lemon { background: linear-gradient(135deg, rgba(255,228,77,0.17), rgba(255,228,77,0.05)); border-color: rgba(255,228,77,0.3); }
   .card-dark { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.1); }
 
-  .cat-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-shrink: 0; }
-  .cat-icon { font-size: 26px; line-height: 1; }
-  .cat-title { font-family: 'Fredoka One', cursive; font-size: 28px; }
+  .cat-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; flex-shrink: 0; }
+  .cat-icon { font-size: 24px; line-height: 1; }
+  .cat-title { font-family: 'Fredoka One', cursive; font-size: 26px; }
   .sky-text { color: var(--sky); }
   .orange-text { color: var(--orange); }
   .lemon-text { color: var(--lemon); }
   .bubblegum-text { color: var(--bubblegum); }
 
-  .price-row { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 10px; flex-shrink: 0; }
-  .price-pill { font-family: 'Fredoka One', cursive; font-size: 18px; padding: 4px 16px; border-radius: 22px; display: flex; align-items: center; gap: 5px; }
+  .price-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; flex-shrink: 0; }
+  .price-pill { font-family: 'Fredoka One', cursive; font-size: 17px; padding: 3px 14px; border-radius: 20px; display: flex; align-items: center; gap: 4px; }
   .price-pill-sky { background: var(--sky); color: var(--dark); }
   .price-pill-orange { background: var(--orange); color: white; }
   .price-pill-lemon { background: var(--lemon); color: var(--dark); }
-  .size-label { font-size: 12px; font-weight: 800; opacity: 0.8; text-transform: uppercase; }
+  .size-label { font-size: 11px; font-weight: 800; opacity: 0.8; text-transform: uppercase; }
 
-  .mod-section { margin-top: 8px; flex-shrink: 0; }
-  .mod-label { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,0.4); margin-bottom: 6px; }
-  .mod-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-  .mod-tag { font-size: 16px; font-weight: 700; color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.08); border-radius: 9px; padding: 5px 13px; border: 1px solid rgba(255,255,255,0.12); }
-  .flavors-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 5px; }
-  .flavor-name { font-size: 16px; font-weight: 700; color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.08); padding: 5px 13px; border-radius: 9px; border: 1px solid rgba(255,255,255,0.12); }
+  .mod-section { margin-top: 6px; flex-shrink: 0; }
+  .mod-label { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,0.4); margin-bottom: 5px; }
+  .mod-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+  .mod-tag { font-size: 15px; font-weight: 700; color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.08); border-radius: 8px; padding: 4px 12px; border: 1px solid rgba(255,255,255,0.12); }
+  .flavors-list { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 4px; }
+  .flavor-name { font-size: 15px; font-weight: 700; color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.08); padding: 4px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.12); }
 
-  .soda-split { display: flex; gap: 12px; margin-bottom: 10px; }
+  .soda-split { display: flex; gap: 10px; margin-bottom: 8px; }
   .soda-half { flex: 1; }
-  .soda-name { font-size: 15px; font-weight: 800; color: var(--sky); margin-bottom: 5px; }
+  .soda-name { font-size: 14px; font-weight: 800; color: var(--sky); margin-bottom: 4px; }
   .soda-name-dim { color: rgba(103,232,249,0.55); }
 
-  .froyo-note { font-size: 12px; font-weight: 800; color: rgba(255,228,77,0.65); letter-spacing: 1px; margin-bottom: 8px; flex-shrink: 0; }
+  .froyo-note { font-size: 11px; font-weight: 800; color: rgba(255,228,77,0.65); letter-spacing: 1px; margin-bottom: 6px; flex-shrink: 0; }
 
-  .food-item { display: flex; justify-content: space-between; align-items: flex-start; padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.07); flex-shrink: 0; }
+  .food-item { display: flex; justify-content: space-between; align-items: flex-start; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.07); flex-shrink: 0; }
   .food-item:last-child { border-bottom: none; }
   .food-name { font-size: 16px; font-weight: 800; color: rgba(255,255,255,0.92); }
-  .food-desc { font-size: 12px; color: rgba(255,255,255,0.42); margin-top: 2px; line-height: 1.3; }
+  .food-desc { font-size: 11px; color: rgba(255,255,255,0.42); margin-top: 2px; line-height: 1.3; }
   .food-price { font-family: 'Fredoka One', cursive; font-size: 20px; color: var(--lemon); white-space: nowrap; margin-left: 10px; flex-shrink: 0; }
 
-  .bottom-nav { display: flex; justify-content: center; gap: 10px; margin-top: 12px; flex-shrink: 0; }
+  .bottom-nav { display: flex; justify-content: center; gap: 10px; margin-top: 8px; flex-shrink: 0; }
   .nav-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.15); }
   .nav-dot.active { background: var(--hot-pink); width: 30px; border-radius: 5px; }
 </style>
