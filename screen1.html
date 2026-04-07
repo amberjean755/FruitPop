@@ -23,40 +23,40 @@
       radial-gradient(circle at 50% 50%, rgba(192,132,252,0.08) 0%, transparent 60%);
     pointer-events: none; z-index: 0;
   }
-  .wrapper { position: relative; z-index: 1; height: 100vh; display: flex; flex-direction: column; padding: 18px 24px 12px; }
-  .header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; flex-shrink: 0; }
-  .logo { font-family: 'Fredoka One', cursive; font-size: 56px; background: linear-gradient(135deg, var(--hot-pink), var(--bubblegum), var(--lemon)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: drop-shadow(0 0 12px rgba(255,45,123,0.4)); }
-  .screen-label { font-family: 'Fredoka One', cursive; font-size: 18px; color: rgba(255,255,255,0.2); letter-spacing: 3px; text-transform: uppercase; }
-  .divider { height: 2px; background: linear-gradient(90deg, transparent, var(--hot-pink), var(--bubblegum), var(--mint), transparent); border-radius: 2px; margin-bottom: 14px; flex-shrink: 0; }
-  .main-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 14px; flex: 1; min-height: 0; }
-  .card { border-radius: 22px; padding: 20px 24px; position: relative; overflow: hidden; border: 1.5px solid rgba(255,255,255,0.08); display: flex; flex-direction: column; }
+  .wrapper { position: relative; z-index: 1; height: 100vh; display: flex; flex-direction: column; padding: 12px 20px 8px; }
+  .header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; flex-shrink: 0; }
+  .logo { font-family: 'Fredoka One', cursive; font-size: 48px; background: linear-gradient(135deg, var(--hot-pink), var(--bubblegum), var(--lemon)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: drop-shadow(0 0 12px rgba(255,45,123,0.4)); }
+  .screen-label { font-family: 'Fredoka One', cursive; font-size: 16px; color: rgba(255,255,255,0.2); letter-spacing: 3px; text-transform: uppercase; }
+  .divider { height: 2px; background: linear-gradient(90deg, transparent, var(--hot-pink), var(--bubblegum), var(--mint), transparent); border-radius: 2px; margin-bottom: 10px; flex-shrink: 0; }
+  .main-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 10px; flex: 1; min-height: 0; }
+  .card { border-radius: 18px; padding: 14px 18px; position: relative; overflow: hidden; border: 1.5px solid rgba(255,255,255,0.08); display: flex; flex-direction: column; }
   .card::before { content: ''; position: absolute; inset: 0; background: rgba(255,255,255,0.025); pointer-events: none; }
   .card-pink { background: linear-gradient(135deg, rgba(255,45,123,0.2), rgba(255,110,180,0.08)); border-color: rgba(255,45,123,0.35); }
   .card-lavender { background: linear-gradient(135deg, rgba(192,132,252,0.2), rgba(192,132,252,0.07)); border-color: rgba(192,132,252,0.35); }
   .card-mint { background: linear-gradient(135deg, rgba(0,229,160,0.17), rgba(0,229,160,0.05)); border-color: rgba(0,229,160,0.3); }
-  .cat-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; flex-shrink: 0; }
-  .cat-icon { font-size: 30px; line-height: 1; }
-  .cat-title { font-family: 'Fredoka One', cursive; font-size: 32px; }
+  .cat-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; flex-shrink: 0; }
+  .cat-icon { font-size: 26px; line-height: 1; }
+  .cat-title { font-family: 'Fredoka One', cursive; font-size: 28px; }
   .pink-text { color: var(--hot-pink); }
   .lavender-text { color: var(--lavender); }
   .mint-text { color: var(--mint); }
-  .price-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; flex-shrink: 0; }
-  .price-pill { font-family: 'Fredoka One', cursive; font-size: 20px; padding: 5px 18px; border-radius: 24px; display: flex; align-items: center; gap: 5px; }
+  .price-row { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 8px; flex-shrink: 0; }
+  .price-pill { font-family: 'Fredoka One', cursive; font-size: 18px; padding: 4px 15px; border-radius: 22px; display: flex; align-items: center; gap: 4px; }
   .price-pill-pink { background: var(--hot-pink); color: white; }
   .price-pill-lavender { background: var(--lavender); color: white; }
   .price-pill-mint { background: var(--mint); color: var(--dark); }
-  .size-label { font-size: 13px; font-weight: 800; opacity: 0.85; text-transform: uppercase; }
-  .content-area { display: flex; gap: 16px; flex: 1; min-height: 0; }
-  .content-col { flex: 1; display: flex; flex-direction: column; gap: 12px; }
+  .size-label { font-size: 12px; font-weight: 800; opacity: 0.85; text-transform: uppercase; }
+  .content-area { display: flex; gap: 14px; flex: 1; min-height: 0; }
+  .content-col { flex: 1; display: flex; flex-direction: column; gap: 8px; }
   .mod-section { flex-shrink: 0; }
-  .mod-label { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,0.4); margin-bottom: 7px; }
-  .mod-tags { display: flex; flex-wrap: wrap; gap: 7px; }
-  .mod-tag { font-size: 17px; font-weight: 700; color: rgba(255,255,255,0.88); background: rgba(255,255,255,0.08); border-radius: 10px; padding: 6px 16px; border: 1px solid rgba(255,255,255,0.13); }
+  .mod-label { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,0.4); margin-bottom: 5px; }
+  .mod-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .mod-tag { font-size: 16px; font-weight: 700; color: rgba(255,255,255,0.88); background: rgba(255,255,255,0.08); border-radius: 9px; padding: 4px 14px; border: 1px solid rgba(255,255,255,0.13); }
   .mod-tag-accent { color: var(--bubblegum); background: rgba(255,45,123,0.1); border-color: rgba(255,45,123,0.2); }
-  .flavors-list { display: flex; flex-wrap: wrap; gap: 7px; }
-  .flavor-name { font-size: 17px; font-weight: 700; color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.08); padding: 6px 15px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.13); }
-  .upcharge { display: inline-flex; align-items: center; background: rgba(255,228,77,0.15); border: 1px solid rgba(255,228,77,0.3); color: var(--lemon); font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; padding: 2px 8px; border-radius: 6px; margin-left: 5px; vertical-align: middle; }
-  .bottom-nav { display: flex; justify-content: center; gap: 10px; margin-top: 12px; flex-shrink: 0; }
+  .flavors-list { display: flex; flex-wrap: wrap; gap: 6px; }
+  .flavor-name { font-size: 16px; font-weight: 700; color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.08); padding: 4px 13px; border-radius: 9px; border: 1px solid rgba(255,255,255,0.13); }
+  .upcharge { display: inline-flex; align-items: center; background: rgba(255,228,77,0.15); border: 1px solid rgba(255,228,77,0.3); color: var(--lemon); font-size: 10px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; padding: 1px 7px; border-radius: 6px; margin-left: 5px; vertical-align: middle; }
+  .bottom-nav { display: flex; justify-content: center; gap: 10px; margin-top: 8px; flex-shrink: 0; }
   .nav-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.15); }
   .nav-dot.active { background: var(--hot-pink); width: 30px; border-radius: 5px; }
 </style>
