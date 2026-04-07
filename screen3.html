@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FruitPop — Add-Ons</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka One&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --hot-pink: #FF2D7B;
+    --bubblegum: #FF6EB4;
+    --soft-pink: #FFD6EC;
+    --mint: #00E5A0;
+    --lemon: #FFE44D;
+    --sky: #67E8F9;
+    --lavender: #C084FC;
+    --orange: #FF8C42;
+    --dark: #1A0A14;
+  }
+  html, body {
+    height: 100%;
+    font-family: 'Nunito', sans-serif;
+    background: var(--dark);
+    overflow: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(192,132,252,0.12) 0%, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(0,229,160,0.1) 0%, transparent 40%),
+      radial-gradient(circle at 50% 50%, rgba(255,45,123,0.06) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .wrapper {
+    position: relative;
+    z-index: 1;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 16px 20px 12px;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    flex-shrink: 0;
+  }
+  .logo {
+    font-family: 'Fredoka One', cursive;
+    font-size: 42px;
+    background: linear-gradient(135deg, var(--hot-pink), var(--bubblegum), var(--lemon));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 12px rgba(255,45,123,0.4));
+  }
+  .screen-label {
+    font-family: 'Fredoka One', cursive;
+    font-size: 13px;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  .divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--lavender), var(--mint), var(--sky), transparent);
+    border-radius: 2px;
+    margin-bottom: 14px;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 26px;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 14px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title span {
+    font-size: 13px;
+    font-weight: 800;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: 'Nunito', sans-serif;
+  }
+
+  /* ADDON GRID — 4 columns */
+  .addon-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    flex: 1;
+    min-height: 0;
+    align-content: start;
+  }
+
+  .addon-card {
+    background: rgba(255,255,255,0.04);
+    border: 1.5px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  /* price-specific accent colors */
+  .addon-card.free { border-color: rgba(103,232,249,0.25); background: rgba(103,232,249,0.05); }
+  .addon-card.cents { border-color: rgba(255,255,255,0.1); }
+  .addon-card.fifty { border-color: rgba(192,132,252,0.22); background: rgba(192,132,252,0.04); }
+  .addon-card.one { border-color: rgba(0,229,160,0.22); background: rgba(0,229,160,0.04); }
+  .addon-card.one-fifty { border-color: rgba(255,228,77,0.22); background: rgba(255,228,77,0.04); }
+  .addon-card.two { border-color: rgba(255,45,123,0.25); background: rgba(255,45,123,0.05); }
+
+  .addon-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .addon-name {
+    font-size: 13px;
+    font-weight: 900;
+    color: rgba(255,255,255,0.92);
+    line-height: 1.2;
+  }
+
+  .addon-price {
+    font-family: 'Fredoka One', cursive;
+    font-size: 16px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .price-free { color: var(--sky); }
+  .price-cents { color: rgba(255,255,255,0.5); }
+  .price-fifty { color: var(--lavender); }
+  .price-one { color: var(--mint); }
+  .price-one-fifty { color: var(--lemon); }
+  .price-two { color: var(--hot-pink); }
+
+  .addon-sub {
+    font-size: 10px;
+    color: rgba(255,255,255,0.38);
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .addon-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+  }
+
+  .addon-tag {
+    font-size: 9px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.65);
+    background: rgba(255,255,255,0.07);
+    border-radius: 5px;
+    padding: 2px 7px;
+    border: 1px solid rgba(255,255,255,0.09);
+  }
+
+  .bottom-nav { display: flex; justify-content: center; gap: 8px; margin-top: 12px; flex-shrink: 0; }
+  .nav-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.15); }
+  .nav-dot.active { background: var(--hot-pink); width: 24px; border-radius: 4px; }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <div class="header">
+    <div class="logo">🍓 FruitPop</div>
+    <div class="screen-label">Screen 3 of 3 · Add-Ons</div>
+  </div>
+  <div class="divider"></div>
+
+  <div class="section-title">
+    ✨ Add-Ons <span>available on any item</span>
+  </div>
+
+  <div class="addon-grid">
+
+    <!-- FREE -->
+    <div class="addon-card free">
+      <div class="addon-top">
+        <div class="addon-name">Extra Ice</div>
+        <div class="addon-price price-free">FREE</div>
+      </div>
+    </div>
+
+    <!-- CENTS -->
+    <div class="addon-card cents">
+      <div class="addon-top">
+        <div class="addon-name">Maraschino Cherry</div>
+        <div class="addon-price price-cents">+$0.15</div>
+      </div>
+      <div class="addon-sub">per cherry</div>
+    </div>
+
+    <div class="addon-card cents">
+      <div class="addon-top">
+        <div class="addon-name">Lemon / Lime Wedge</div>
+        <div class="addon-price price-cents">+$0.25</div>
+      </div>
+    </div>
+
+    <div class="addon-card cents">
+      <div class="addon-top">
+        <div class="addon-name">Cream</div>
+        <div class="addon-price price-cents">+$0.25</div>
+      </div>
+    </div>
+
+    <div class="addon-card cents">
+      <div class="addon-top">
+        <div class="addon-name">Tajin</div>
+        <div class="addon-price price-cents">+$0.25</div>
+      </div>
+    </div>
+
+    <div class="addon-card cents">
+      <div class="addon-top">
+        <div class="addon-name">Sweetener</div>
+        <div class="addon-price price-cents">+$0.25</div>
+      </div>
+      <div class="addon-tags">
+        <span class="addon-tag">Honey</span>
+        <span class="addon-tag">Agave</span>
+        <span class="addon-tag">Cane Sugar</span>
+        <span class="addon-tag">Sweet-N-Low</span>
+        <span class="addon-tag">Simple Syrup</span>
+      </div>
+    </div>
+
+    <!-- $0.50 -->
+    <div class="addon-card fifty">
+      <div class="addon-top">
+        <div class="addon-name">Flavor Syrup — Fruit</div>
+        <div class="addon-price price-fifty">+$0.50</div>
+      </div>
+      <div class="addon-tags">
+        <span class="addon-tag">Raspberry</span>
+        <span class="addon-tag">Strawberry</span>
+        <span class="addon-tag">Blackberry</span>
+        <span class="addon-tag">Blueberry</span>
+        <span class="addon-tag">Honey</span>
+        <span class="addon-tag">Orange</span>
+        <span class="addon-tag">Guava</span>
+        <span class="addon-tag">Peach</span>
+        <span class="addon-tag">Chili</span>
+        <span class="addon-tag">Blood Orange</span>
+        <span class="addon-tag">Lavender</span>
+        <span class="addon-tag">Mango</span>
+        <span class="addon-tag">Pineapple</span>
+        <span class="addon-tag">Passionfruit</span>
+        <span class="addon-tag">Lychee</span>
+        <span class="addon-tag">Hibiscus</span>
+      </div>
+    </div>
+
+    <div class="addon-card fifty">
+      <div class="addon-top">
+        <div class="addon-name">Flavor Syrup — Sweet</div>
+        <div class="addon-price price-fifty">+$0.50</div>
+      </div>
+      <div class="addon-tags">
+        <span class="addon-tag">Vanilla</span>
+        <span class="addon-tag">Caramel</span>
+        <span class="addon-tag">Toasted Marshmallow</span>
+        <span class="addon-tag">Hazelnut</span>
+        <span class="addon-tag">Brown Sugar</span>
+        <span class="addon-tag">Honey</span>
+        <span class="addon-tag">Pistachio</span>
+        <span class="addon-tag">Peppermint</span>
+        <span class="addon-tag">Cinnamon</span>
+        <span class="addon-tag">Lavender</span>
+        <span class="addon-tag">Maple</span>
+      </div>
+    </div>
+
+    <div class="addon-card fifty">
+      <div class="addon-top">
+        <div class="addon-name">Drizzle</div>
+        <div class="addon-price price-fifty">+$0.50</div>
+      </div>
+      <div class="addon-tags">
+        <span class="addon-tag">Dark Chocolate</span>
+        <span class="addon-tag">Milk Chocolate</span>
+        <span class="addon-tag">White Chocolate</span>
+        <span class="addon-tag">Caramel</span>
+        <span class="addon-tag">Marshmallow</span>
+      </div>
+    </div>
+
+    <div class="addon-card fifty">
+      <div class="addon-top">
+        <div class="addon-name">Candy / Cookie Topping</div>
+        <div class="addon-price price-fifty">+$0.50</div>
+      </div>
+      <div class="addon-tags">
+        <span class="addon-tag">Crushed Oreos</span>
+        <span class="addon-tag">Mini Marshmallows</span>
+        <span class="addon-tag">Gummy Worms</span>
+        <span class="addon-tag">Chocolate Chunks</span>
+        <span class="addon-tag">White Choc Chips</span>
+        <span class="addon-tag">Butterscotch Chips</span>
+        <span class="addon-tag">Graham Crackers</span>
+        <span class="addon-tag">Nilla Wafers</span>
+        <span class="addon-tag">Coconut Flakes</span>
+      </div>
+    </div>
+
+    <!-- $1.00 -->
+    <div class="addon-card one">
+      <div class="addon-top">
+        <div class="addon-name">Whipped Cream</div>
+        <div class="addon-price price-one">+$1.00</div>
+      </div>
+    </div>
+
+    <div class="addon-card one">
+      <div class="addon-top">
+        <div class="addon-name">Milk</div>
+        <div class="addon-price price-one">+$1.00</div>
+      </div>
+    </div>
+
+    <div class="addon-card one">
+      <div class="addon-top">
+        <div class="addon-name">Energy Shot</div>
+        <div class="addon-price price-one">+$1.00</div>
+      </div>
+      <div class="addon-sub">55mg caffeine</div>
+    </div>
+
+    <div class="addon-card one">
+      <div class="addon-top">
+        <div class="addon-name">Nuts</div>
+        <div class="addon-price price-one">+$1.00</div>
+      </div>
+      <div class="addon-tags">
+        <span class="addon-tag">Pistachios</span>
+        <span class="addon-tag">Cashews</span>
+        <span class="addon-tag">Walnuts</span>
+        <span class="addon-tag">Peanuts</span>
+        <span class="addon-tag">Hemp Seeds</span>
+        <span class="addon-tag">Chia Seeds</span>
+      </div>
+    </div>
+
+    <div class="addon-card one">
+      <div class="addon-top">
+        <div class="addon-name">Freeze Dried Fruit</div>
+        <div class="addon-price price-one">+$1.00</div>
+      </div>
+      <div class="addon-tags">
+        <span class="addon-tag">Strawberry</span>
+        <span class="addon-tag">Mango</span>
+        <span class="addon-tag">Lemon</span>
+        <span class="addon-tag">Blood Orange</span>
+        <span class="addon-tag">Peach</span>
+        <span class="addon-tag">Raspberry</span>
+      </div>
+    </div>
+
+    <!-- $1.50 -->
+    <div class="addon-card one-fifty">
+      <div class="addon-top">
+        <div class="addon-name">Tapioca Pearls</div>
+        <div class="addon-price price-one-fifty">+$1.50</div>
+      </div>
+    </div>
+
+    <div class="addon-card one-fifty">
+      <div class="addon-top">
+        <div class="addon-name">Cold Foam</div>
+        <div class="addon-price price-one-fifty">+$1.50</div>
+      </div>
+      <div class="addon-tags">
+        <span class="addon-tag">Plain</span>
+        <span class="addon-tag">Raspberry</span>
+        <span class="addon-tag">Matcha</span>
+      </div>
+    </div>
+
+    <div class="addon-card one-fifty">
+      <div class="addon-top">
+        <div class="addon-name">Fresh Fruit</div>
+        <div class="addon-price price-one-fifty">+$1.50</div>
+      </div>
+      <div class="addon-tags">
+        <span class="addon-tag">Strawberry</span>
+        <span class="addon-tag">Raspberry</span>
+        <span class="addon-tag">Blackberry</span>
+        <span class="addon-tag">Blueberry</span>
+        <span class="addon-tag">Mango</span>
+        <span class="addon-tag">Dragonfruit</span>
+        <span class="addon-tag">Pineapple</span>
+        <span class="addon-tag">Peach</span>
+        <span class="addon-tag">Orange</span>
+        <span class="addon-tag">Banana</span>
+        <span class="addon-tag">Grapefruit</span>
+        <span class="addon-tag">Pear</span>
+      </div>
+    </div>
+
+    <!-- $2.00 -->
+    <div class="addon-card two">
+      <div class="addon-top">
+        <div class="addon-name">Premium Topping</div>
+        <div class="addon-price price-two">+$2.00</div>
+      </div>
+      <div class="addon-tags">
+        <span class="addon-tag">Raspberry Compote</span>
+        <span class="addon-tag">Blackberry Compote</span>
+        <span class="addon-tag">Cranberry Compote</span>
+        <span class="addon-tag">Fresh Pear</span>
+        <span class="addon-tag">Pomegranate Arils</span>
+        <span class="addon-tag">Guava Chunks</span>
+      </div>
+    </div>
+
+    <div class="addon-card two">
+      <div class="addon-top">
+        <div class="addon-name">Popping Boba</div>
+        <div class="addon-price price-two">+$2.00</div>
+      </div>
+      <div class="addon-tags">
+        <span class="addon-tag">Strawberry</span>
+        <span class="addon-tag">Passionfruit</span>
+        <span class="addon-tag">Blueberry</span>
+        <span class="addon-tag">Lychee</span>
+        <span class="addon-tag">Mango</span>
+      </div>
+    </div>
+
+  </div><!-- end addon-grid -->
+
+  <div class="bottom-nav">
+    <div class="nav-dot"></div>
+    <div class="nav-dot"></div>
+    <div class="nav-dot active"></div>
+  </div>
+
+</div>
+</body>
+</html>

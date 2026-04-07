@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FruitPop — Froyo & Food</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --hot-pink: #FF2D7B;
+    --bubblegum: #FF6EB4;
+    --soft-pink: #FFD6EC;
+    --mint: #00E5A0;
+    --lemon: #FFE44D;
+    --sky: #67E8F9;
+    --lavender: #C084FC;
+    --orange: #FF8C42;
+    --dark: #1A0A14;
+  }
+  html, body {
+    height: 100%;
+    font-family: 'Nunito', sans-serif;
+    background: var(--dark);
+    overflow: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(circle at 15% 70%, rgba(255,140,66,0.12) 0%, transparent 40%),
+      radial-gradient(circle at 85% 20%, rgba(255,228,77,0.1) 0%, transparent 40%),
+      radial-gradient(circle at 50% 50%, rgba(103,232,249,0.07) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .wrapper {
+    position: relative;
+    z-index: 1;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 16px 20px 12px;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    flex-shrink: 0;
+  }
+  .logo {
+    font-family: 'Fredoka One', cursive;
+    font-size: 42px;
+    background: linear-gradient(135deg, var(--hot-pink), var(--bubblegum), var(--lemon));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 12px rgba(255,45,123,0.4));
+  }
+  .screen-label {
+    font-family: 'Fredoka One', cursive;
+    font-size: 13px;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  .divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--orange), var(--lemon), var(--mint), transparent);
+    border-radius: 2px;
+    margin-bottom: 14px;
+    flex-shrink: 0;
+  }
+
+  /* TOP ROW: 3 cols */
+  .top-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 12px;
+    flex-shrink: 0;
+  }
+
+  /* BOTTOM ROW: food + sides */
+  .bottom-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .card {
+    border-radius: 20px;
+    padding: 14px 16px;
+    position: relative;
+    overflow: hidden;
+    border: 1.5px solid rgba(255,255,255,0.08);
+    display: flex;
+    flex-direction: column;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.025);
+    pointer-events: none;
+  }
+  .card-sky { background: linear-gradient(135deg, rgba(103,232,249,0.17), rgba(103,232,249,0.05)); border-color: rgba(103,232,249,0.3); }
+  .card-orange { background: linear-gradient(135deg, rgba(255,140,66,0.17), rgba(255,140,66,0.05)); border-color: rgba(255,140,66,0.3); }
+  .card-lemon { background: linear-gradient(135deg, rgba(255,228,77,0.17), rgba(255,228,77,0.05)); border-color: rgba(255,228,77,0.3); }
+  .card-dark { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.1); }
+  .card-pink { background: linear-gradient(135deg, rgba(255,45,123,0.15), rgba(255,110,180,0.06)); border-color: rgba(255,45,123,0.25); }
+
+  .cat-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; flex-shrink: 0; }
+  .cat-icon { font-size: 20px; line-height: 1; }
+  .cat-title { font-family: 'Fredoka One', cursive; font-size: 20px; letter-spacing: 0.5px; }
+
+  .sky-text { color: var(--sky); }
+  .orange-text { color: var(--orange); }
+  .lemon-text { color: var(--lemon); }
+  .bubblegum-text { color: var(--bubblegum); }
+  .mint-text { color: var(--mint); }
+
+  .price-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; flex-shrink: 0; }
+  .price-pill {
+    font-family: 'Fredoka One', cursive;
+    font-size: 13px;
+    padding: 3px 12px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .price-pill-sky { background: var(--sky); color: var(--dark); }
+  .price-pill-orange { background: var(--orange); color: white; }
+  .price-pill-lemon { background: var(--lemon); color: var(--dark); }
+  .size-label { font-size: 9px; font-weight: 800; opacity: 0.75; text-transform: uppercase; }
+
+  .mod-section { margin-top: 6px; flex-shrink: 0; }
+  .mod-label { font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,0.35); margin-bottom: 3px; }
+  .mod-tags { display: flex; flex-wrap: wrap; gap: 3px; }
+  .mod-tag { font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.8); background: rgba(255,255,255,0.07); border-radius: 7px; padding: 2px 8px; border: 1px solid rgba(255,255,255,0.1); }
+
+  .flavors-list { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 3px; }
+  .flavor-name { font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.07); padding: 2px 8px; border-radius: 7px; border: 1px solid rgba(255,255,255,0.1); }
+
+  /* SODA SPLIT */
+  .soda-split { display: flex; gap: 10px; margin-bottom: 8px; }
+  .soda-half { flex: 1; }
+  .soda-name { font-size: 11px; font-weight: 800; color: var(--sky); margin-bottom: 4px; }
+  .soda-name-dim { color: rgba(103,232,249,0.55); }
+
+  /* FROYO note */
+  .froyo-note { font-size: 9px; font-weight: 800; color: rgba(255,228,77,0.6); letter-spacing: 1px; margin-bottom: 6px; flex-shrink: 0; }
+
+  /* FOOD ITEMS */
+  .food-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    flex-shrink: 0;
+  }
+  .food-item:last-child { border-bottom: none; }
+  .food-name { font-size: 11px; font-weight: 800; color: rgba(255,255,255,0.9); }
+  .food-desc { font-size: 9px; color: rgba(255,255,255,0.4); margin-top: 1px; line-height: 1.3; }
+  .food-price { font-family: 'Fredoka One', cursive; font-size: 14px; color: var(--lemon); white-space: nowrap; margin-left: 8px; flex-shrink: 0; }
+
+  /* SEASONAL STRIP */
+  .seasonal-strip {
+    background: linear-gradient(135deg, rgba(255,45,123,0.2), rgba(192,132,252,0.15));
+    border: 1.5px solid rgba(255,45,123,0.35);
+    border-radius: 14px;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    flex-shrink: 0;
+  }
+  .seasonal-left { display: flex; align-items: center; gap: 10px; }
+  .seasonal-icon { font-size: 22px; }
+  .seasonal-title { font-family: 'Fredoka One', cursive; font-size: 18px; color: var(--hot-pink); }
+  .seasonal-sub { font-size: 9px; color: rgba(255,255,255,0.45); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+  .seasonal-prices { display: flex; gap: 8px; }
+  .price-pill-pink { background: var(--hot-pink); color: white; }
+  .price-pill-lavender { background: var(--lavender); color: white; }
+
+  .bottom-nav { display: flex; justify-content: center; gap: 8px; margin-top: 12px; flex-shrink: 0; }
+  .nav-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.15); }
+  .nav-dot.active { background: var(--hot-pink); width: 24px; border-radius: 4px; }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <div class="header">
+    <div class="logo">🍓 FruitPop</div>
+    <div class="screen-label">Screen 2 of 3 · Froyo & Food</div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- SEASONAL STRIP -->
+  <div class="seasonal-strip">
+    <div class="seasonal-left">
+      <div class="seasonal-icon">✨</div>
+      <div>
+        <div class="seasonal-title">Seasonal Feature</div>
+        <div class="seasonal-sub">Ask about this week's exclusive drop</div>
+      </div>
+    </div>
+    <div class="seasonal-prices">
+      <div class="price-pill price-pill-pink" style="font-family:'Fredoka One',cursive;font-size:13px;padding:4px 14px;border-radius:20px;display:flex;align-items:center;gap:4px;"><span class="size-label">Drink</span> $7.99</div>
+      <div class="price-pill price-pill-lavender" style="font-family:'Fredoka One',cursive;font-size:13px;padding:4px 14px;border-radius:20px;display:flex;align-items:center;gap:4px;"><span class="size-label">Froyo</span> $7.99</div>
+    </div>
+  </div>
+
+  <!-- TOP ROW -->
+  <div class="top-grid">
+
+    <!-- SODAS -->
+    <div class="card card-sky">
+      <div class="cat-header">
+        <span class="cat-icon">🥤</span>
+        <span class="cat-title sky-text">Sodas</span>
+      </div>
+      <div class="soda-split">
+        <div class="soda-half">
+          <div class="soda-name">French Soda</div>
+          <div class="price-row">
+            <div class="price-pill price-pill-sky"><span class="size-label">S</span> $4.99</div>
+            <div class="price-pill price-pill-sky"><span class="size-label">M</span> $5.99</div>
+            <div class="price-pill price-pill-sky"><span class="size-label">L</span> $6.99</div>
+          </div>
+        </div>
+        <div class="soda-half">
+          <div class="soda-name soda-name-dim">Italian Soda</div>
+          <div class="price-row">
+            <div class="price-pill price-pill-sky"><span class="size-label">S</span> $3.99</div>
+            <div class="price-pill price-pill-sky"><span class="size-label">M</span> $4.99</div>
+            <div class="price-pill price-pill-sky"><span class="size-label">L</span> $5.99</div>
+          </div>
+        </div>
+      </div>
+      <div class="mod-section">
+        <div class="mod-label">Flavor</div>
+        <div class="flavors-list">
+          <span class="flavor-name">Raspberry</span>
+          <span class="flavor-name">Strawberry</span>
+          <span class="flavor-name">Blueberry</span>
+          <span class="flavor-name">Blackberry</span>
+          <span class="flavor-name">Orange</span>
+          <span class="flavor-name">Guava</span>
+          <span class="flavor-name">Peach</span>
+          <span class="flavor-name">Wildberry</span>
+          <span class="flavor-name">POG</span>
+          <span class="flavor-name">Mango</span>
+          <span class="flavor-name">Pineapple</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- YO-SHAKE -->
+    <div class="card card-orange">
+      <div class="cat-header">
+        <span class="cat-icon">🍦</span>
+        <span class="cat-title orange-text">Yo-Shake</span>
+      </div>
+      <div class="price-row">
+        <div class="price-pill price-pill-orange"><span class="size-label">S</span> $6.99</div>
+        <div class="price-pill price-pill-orange"><span class="size-label">M</span> $7.99</div>
+        <div class="price-pill price-pill-orange"><span class="size-label">L</span> $8.99</div>
+      </div>
+      <div class="mod-section">
+        <div class="mod-label">Base Froyo Flavor</div>
+        <div class="flavors-list">
+          <span class="flavor-name">Vanilla</span>
+          <span class="flavor-name">Chocolate</span>
+          <span class="flavor-name">Yogurt</span>
+          <span class="flavor-name">Matcha</span>
+          <span class="flavor-name">Strawberry</span>
+          <span class="flavor-name">Mango</span>
+        </div>
+      </div>
+      <div class="mod-section">
+        <div class="mod-label">Mix-In</div>
+        <div class="flavors-list">
+          <span class="flavor-name">Strawberry</span>
+          <span class="flavor-name">Raspberry</span>
+          <span class="flavor-name">Blueberry</span>
+          <span class="flavor-name">Blackberry</span>
+          <span class="flavor-name">Mango</span>
+          <span class="flavor-name">Pineapple</span>
+          <span class="flavor-name">Peach</span>
+          <span class="flavor-name">Dragonfruit</span>
+          <span class="flavor-name">Chocolate Chunks</span>
+          <span class="flavor-name">Dark Choc Sauce</span>
+          <span class="flavor-name">Marshmallow Sauce</span>
+        </div>
+      </div>
+      <div class="mod-section">
+        <div class="mod-label">Topping</div>
+        <div class="mod-tags">
+          <span class="mod-tag">Whipped Cream</span>
+          <span class="mod-tag">Cold Foam</span>
+          <span class="mod-tag">None</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FROYO -->
+    <div class="card card-lemon">
+      <div class="cat-header">
+        <span class="cat-icon">🍨</span>
+        <span class="cat-title lemon-text">FroYo</span>
+      </div>
+      <div class="price-row">
+        <div class="price-pill price-pill-lemon"><span class="size-label">S</span> $4.99</div>
+        <div class="price-pill price-pill-lemon"><span class="size-label">M</span> $5.99</div>
+        <div class="price-pill price-pill-lemon"><span class="size-label">L</span> $6.99</div>
+      </div>
+      <div class="froyo-note">1 TOPPING INCLUDED · +$1.25 EACH AFTER</div>
+      <div class="mod-section">
+        <div class="mod-label">Flavors — 6 Rotating</div>
+        <div class="flavors-list">
+          <span class="flavor-name">Strawberry</span>
+          <span class="flavor-name">Mango</span>
+          <span class="flavor-name">Chocolate</span>
+          <span class="flavor-name">Vanilla</span>
+          <span class="flavor-name">Matcha</span>
+          <span class="flavor-name">Plain Yogurt</span>
+          <span class="flavor-name">Seasonal ✨</span>
+        </div>
+      </div>
+      <div class="mod-section">
+        <div class="mod-label">Toppings</div>
+        <div class="flavors-list">
+          <span class="flavor-name">Strawberry</span>
+          <span class="flavor-name">Blueberry</span>
+          <span class="flavor-name">Raspberry</span>
+          <span class="flavor-name">Blackberry</span>
+          <span class="flavor-name">Peach</span>
+          <span class="flavor-name">Mango</span>
+          <span class="flavor-name">Orange</span>
+          <span class="flavor-name">Dragonfruit</span>
+          <span class="flavor-name">Pineapple</span>
+          <span class="flavor-name">Oreos</span>
+          <span class="flavor-name">Mini Marshmallows</span>
+          <span class="flavor-name">Chocolate Chunks</span>
+          <span class="flavor-name">Graham Cracker</span>
+          <span class="flavor-name">Coconut Flakes</span>
+          <span class="flavor-name">Tajin</span>
+          <span class="flavor-name">Popping Boba</span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end top-grid -->
+
+  <!-- BOTTOM ROW -->
+  <div class="bottom-grid">
+
+    <!-- BREAKFAST -->
+    <div class="card card-dark">
+      <div class="cat-header">
+        <span class="cat-icon">🌅</span>
+        <span class="cat-title bubblegum-text">Breakfast</span>
+      </div>
+      <div class="food-item">
+        <div>
+          <div class="food-name">Parfaits</div>
+          <div class="food-desc">Seasonal · Mixed Berry · Tropical</div>
+        </div>
+        <div class="food-price">$5.99</div>
+      </div>
+      <div class="food-item">
+        <div>
+          <div class="food-name">Fro-Granola Bowl</div>
+          <div class="food-desc">Froyo + granola (Plain/Chocolate) + fruit</div>
+        </div>
+        <div class="food-price">$5.99</div>
+      </div>
+      <div class="food-item">
+        <div>
+          <div class="food-name">Oatmeal Cup — Plain</div>
+        </div>
+        <div class="food-price">$2.99</div>
+      </div>
+      <div class="food-item">
+        <div>
+          <div class="food-name">Oatmeal Cup — w/ Fruit</div>
+          <div class="food-desc">Choice of sweetener + fruit</div>
+        </div>
+        <div class="food-price">$4.99</div>
+      </div>
+    </div>
+
+    <!-- LUNCH -->
+    <div class="card card-dark">
+      <div class="cat-header">
+        <span class="cat-icon">🥪</span>
+        <span class="cat-title orange-text">Lunch</span>
+      </div>
+      <div class="food-item">
+        <div>
+          <div class="food-name">Sandwich</div>
+          <div class="food-desc">Dill Cream Cheese & Cucumber · Avocado & Sprouts · Hummus & Veggies</div>
+        </div>
+        <div class="food-price">$5.99</div>
+      </div>
+      <div class="food-item">
+        <div>
+          <div class="food-name">Snack Plate</div>
+          <div class="food-desc">Mozz, Crackers & Berries · Hummus, Pita & Cucumber</div>
+        </div>
+        <div class="food-price">$5.99</div>
+      </div>
+      <div class="food-item">
+        <div>
+          <div class="food-name">Yogurt Dip & Pita Chips</div>
+        </div>
+        <div class="food-price">$6.99</div>
+      </div>
+    </div>
+
+    <!-- SIDES -->
+    <div class="card card-dark">
+      <div class="cat-header">
+        <span class="cat-icon">🫙</span>
+        <span class="cat-title sky-text">Sides</span>
+      </div>
+      <div class="food-item">
+        <div><div class="food-name">Water</div></div>
+        <div class="food-price">$0.25</div>
+      </div>
+      <div class="food-item">
+        <div><div class="food-name">Fruit Cup — 4oz</div></div>
+        <div class="food-price">$4.99</div>
+      </div>
+      <div class="food-item">
+        <div><div class="food-name">Fruit Cup — 8oz</div></div>
+        <div class="food-price">$6.99</div>
+      </div>
+      <div class="food-item">
+        <div><div class="food-name">Packaged Cake</div></div>
+        <div class="food-price">$2.99</div>
+      </div>
+      <div class="food-item">
+        <div><div class="food-name">Nonni's Biscotti</div></div>
+        <div class="food-price">$2.99</div>
+      </div>
+      <div class="food-item">
+        <div><div class="food-name">Almonds Bag</div></div>
+        <div class="food-price">$4.99</div>
+      </div>
+    </div>
+
+  </div><!-- end bottom-grid -->
+
+  <div class="bottom-nav">
+    <div class="nav-dot"></div>
+    <div class="nav-dot active"></div>
+    <div class="nav-dot"></div>
+  </div>
+
+</div>
+</body>
+</html>
